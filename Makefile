@@ -10,25 +10,32 @@
 #*                                                                            *#
 #* ************************************************************************** *#
 
-CFLAGS = -lmlx -framework OpenGL -framework AppKit -Wall -Wextra -Werror -I./includes
+CFLAGS = -g -Wall -Wextra -Werror -I./includes
+PRGFLAGS = -lmlx -framework OpenGL -framework AppKit
 CC = gcc
 
 NAME = fdf
-SRC = main.c
+LIB = libft
+SRC = main.c utils.c hooks.c
 SRCDIR = src
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
+$(NAME): $(OBJ)
+	(cd $(LIB) && $(MAKE))
+	$(CC) -o $(NAME) $(CFLAGS) -I./libft -L./libft $(PRGFLAGS) $(OBJ)
+%.o: $(SRCDIR)/%.c
+	$(CC) -I $(LIB) -o $@ -c $? $(CFLAGS)
 
-$(NAME):
-	@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
 
 clean:
-	@/bin/rm -f $(OBJ)
+	@(cd $(LIB) && $(MAKE) $@)
+	@rm -f $(OBJ)
 
 fclean: clean
-	@/bin/rm -f $(NAME)
+	@(cd $(LIB) && $(MAKE) $@)
+	@rm -f $(NAME)
 
 .PHONY: clean fclean re
 

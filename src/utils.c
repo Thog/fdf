@@ -6,16 +6,13 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 09:59:30 by tguillem          #+#    #+#             */
-/*   Updated: 2016/01/08 14:01:40 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/01/20 15:18:33 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
-#define PROJ_X(X, Y, Z) ((X/2) - (Y/2) + 200)
-#define PROJ_Y(X, Y, Z) (-(Z/2) + (X/4) + (Y/4) + 100)
-#define ABS(X) X < 0 ? (-X) : X
-void		draw_quad(t_env *env, t_vec3 *pos, int size, int color)
+
+void		draw_quad(t_env *env, t_pos *pos, int size, int color)
 {
 	int i;
 	int j;
@@ -40,16 +37,36 @@ void		draw_quad(t_env *env, t_vec3 *pos, int size, int color)
 	}
 }
 
-void		draw_line(t_env *env, t_vec3 *start, t_vec3 *end, int color)
+void		draw_line_2d(t_env *env, t_pos *start, t_pos *end, int color)
 {
+	int			dx;
+	int			dy;
+	int			n;
+	t_pos		*pos;
 
+	dx = end->x - start->x;
+	dy = end->y - start->y;
+	if (dx > dy)
+		n = ABS(dx);
+	else
+		n = ABS(dy);
+	dx /= n;
+	dy /= n;
+	pos = new_pos(start->x, start->y, 0);
+	while (n--)
+	{
+		pos->x += dx;
+		pos->y += dy;
+		mlx_pixel_put(env->mlx, env->win, pos->x, pos->y, color);
+	}
+	free(pos);
 }
 
-t_vec3		*new_vec3(int x, int y, int z)
+t_pos		*new_pos(int x, int y, int z)
 {
-	t_vec3 *result;
+	t_pos *result;
 
-	if (!(result = (t_vec3*)malloc(sizeof(t_vec3))))
+	if (!(result = (t_pos*)malloc(sizeof(t_pos))))
 		return (NULL);
 	result->x = x;
 	result->y = y;

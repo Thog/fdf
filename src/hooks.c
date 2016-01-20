@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 10:41:55 by tguillem          #+#    #+#             */
-/*   Updated: 2016/01/06 15:04:30 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/01/20 15:18:59 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 int		expose_hook(void *param)
 {
-	t_env *env;
-	t_vec3 *pos;
+	t_env	*env;
+	t_pos	*start;
+	t_pos	*end;
 
 	env = (t_env*)param;
-	pos = new_vec3(10, 10, 100);
+	start = new_pos(0, 0, 0);
+	end = new_pos(1240, 1240, 0);
 	if (env)
 	{
-		draw_quad(env, pos, 300, 0xFFFFFF);
+		draw_line_2d(env, start, end, 0xFFFFFF);
 	}
-	free(pos);
+	free(start);
+	free(end);
 	return (env == NULL);
 }

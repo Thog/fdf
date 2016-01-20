@@ -18,20 +18,24 @@ NAME = fdf
 LIB = libft
 SRC = main.c utils.c hooks.c
 SRCDIR = src
+OUTDIR = out
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
-OBJ = $(SRC:.c=.o)
+OBJ = $(addprefix $(OUTDIR)/, $(SRC:.c=.o))
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): mkOut $(OBJ)
 	(cd $(LIB) && $(MAKE))
 	$(CC) -o $(NAME) $(CFLAGS) -I./libft -L./libft $(PRGFLAGS) $(OBJ)
-%.o: $(SRCDIR)/%.c
+$(OUTDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) -I $(LIB) -o $@ -c $? $(CFLAGS)
 
+mkOut:
+	@mkdir -p $(OUTDIR)
 
 clean:
 	@(cd $(LIB) && $(MAKE) $@)
 	@rm -f $(OBJ)
+	@rm -rf $(OUTDIR)
 
 fclean: clean
 	@(cd $(LIB) && $(MAKE) $@)

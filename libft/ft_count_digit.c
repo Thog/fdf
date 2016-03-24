@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_count_digit.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguillem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/23 12:44:50 by tguillem          #+#    #+#             */
-/*   Updated: 2016/02/16 10:52:28 by tguillem         ###   ########.fr       */
+/*   Created: 2016/03/10 16:32:23 by tguillem          #+#    #+#             */
+/*   Updated: 2016/03/10 16:36:03 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_itoa(int n)
+int		ft_count_digit(int value, int base)
 {
-	return (ft_itoa_base(n, 10));
+	int	n;
+
+	n = 0;
+	while (value)
+	{
+		n++;
+		value /= base;
+	}
+	return (n);
 }

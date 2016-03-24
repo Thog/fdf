@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_putwstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguillem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/23 12:44:50 by tguillem          #+#    #+#             */
-/*   Updated: 2016/02/16 10:52:28 by tguillem         ###   ########.fr       */
+/*   Created: 2016/02/04 13:01:03 by tguillem          #+#    #+#             */
+/*   Updated: 2016/03/15 17:30:18 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_itoa(int n)
+void		ft_putwstr(wchar_t *strr)
 {
-	return (ft_itoa_base(n, 10));
+	ft_putwstr_fd(strr, 1);
 }

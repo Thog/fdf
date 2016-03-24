@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_wstrlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguillem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/23 12:44:50 by tguillem          #+#    #+#             */
-/*   Updated: 2016/02/16 10:52:28 by tguillem         ###   ########.fr       */
+/*   Created: 2016/02/04 13:01:49 by tguillem          #+#    #+#             */
+/*   Updated: 2016/02/04 13:01:51 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_itoa(int n)
+size_t	ft_wstrlen(wchar_t *str)
 {
-	return (ft_itoa_base(n, 10));
+	size_t i;
+
+	i = 0;
+	while (*str)
+	{
+		if (*str <= 0x7F)
+			i++;
+		else if (*str <= 0x7FF)
+			i += 2;
+		else if (*str <= 0xFFFF)
+			i += 3;
+		else if (*str <= 0x10FFFF)
+			i += 4;
+		str++;
+	}
+	return (i);
 }

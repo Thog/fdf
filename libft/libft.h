@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguillem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 12:49:44 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/07 14:24:26 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/03/23 16:24:27 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 # define LIBFT_H
 # define MIN -2147483648
 # define MAX 2147483647
+# define ABS(x) ((x) < 0 ? (-(x)) : (x))
+# define BASE_16 "0123456789ABCDEF"
+# include <wchar.h>
 # include <string.h>
+# include <inttypes.h>
+# include "ft_time.h"
+# include "ft_printf/ft_printf.h"
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
@@ -78,12 +84,6 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-typedef	struct		s_arrayelem
-{
-	void			*value;
-	int				size;
-}					t_arrayelem;
-
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
@@ -100,4 +100,31 @@ int					ft_isxdigit(int c);
 int					ft_iscntrl(int c);
 char				*ft_strtrimch(const char *s, char c);
 char				*ft_strtrimcmp(const char *s, int (*f)(int c));
+
+int					ft_max(int x, int y);
+int					ft_min(int x, int y);
+void				ft_putnbrbase(uintmax_t nbr, char *base);
+void				ft_putnbrbase_fd(uintmax_t nbr, char *base, int fd);
+size_t				ft_wstrlen(wchar_t *str);
+void				ft_putwchar(wchar_t chr);
+void				ft_putwchar_fd(wchar_t chr, int fd);
+void				ft_putwstr(wchar_t *strr);
+void				ft_putwstr_fd(wchar_t *strr, int fd);
+int					ft_count_digit(int value, int base);
+char				*ft_itoa_base(int value, int base);
+
+typedef struct		s_buff
+{
+	int				fd;
+	char			*buff;
+	struct s_buff	*next;
+}					t_buff;
+
+int					get_next_line(int const fd, char **line);
+int					ft_parse_args(int ac, char **av, void *data,
+						int (*compute_options)(void*, char*));
+int					ft_usage(char *prg_name, char *usage, char illegal_char);
+char				*ft_error_return(char *str, char *code);
+char				*ft_get_filename(char *path);
+char				**ft_strsplitcmp(char const *s, int (*f)(int c));
 #endif

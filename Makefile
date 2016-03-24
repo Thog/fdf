@@ -23,13 +23,13 @@ SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 OBJ = $(addprefix $(OUTDIR)/, $(SRC:.c=.o))
 all: $(NAME)
 
-$(NAME): mkOut $(OBJ)
+$(NAME): $(OUTDIR) $(OBJ)
 	(cd $(LIB) && $(MAKE))
 	$(CC) -o $(NAME) $(CFLAGS) -I./libft -L./libft $(PRGFLAGS) $(OBJ)
 $(OUTDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) -I $(LIB) -o $@ -c $? $(CFLAGS)
 
-mkOut:
+$(OUTDIR):
 	@mkdir -p $(OUTDIR)
 
 clean:

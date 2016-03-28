@@ -20,7 +20,7 @@ int		expose_hook(void *param)
 
 	env = (t_env*)param;
 	start = new_pos(0, 0, 0);
-	end = new_pos(1240, 1240, 0);
+	end = new_pos(480, 480, 0);
 	if (env)
 	{
 		draw_line_2d(env, start, end, 0xFFFFFF);

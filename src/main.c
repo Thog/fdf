@@ -18,7 +18,7 @@ int		main(void)
 
 	if (!(env = malloc(sizeof(t_env))) ||
 			!(env->mlx = mlx_init()) ||
-			!(env->win = mlx_new_window(env->mlx, 1240, 1240, "fdf")))
+			!(env->win = mlx_new_window(env->mlx, 480, 480, "fdf")))
 		return (1);
 	mlx_expose_hook(env->win, expose_hook, env);
 	mlx_loop(env->mlx);

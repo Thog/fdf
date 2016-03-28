@@ -41,25 +41,33 @@ void		draw_line_2d(t_env *env, t_pos *start, t_pos *end, int color)
 {
 	int			dx;
 	int			dy;
-	int			n;
-	t_pos		*pos;
+	int			x;
+	int			y;
+	int			i;
+	int			pixel;
 
-	dx = end->x - start->x;
-	dy = end->y - start->y;
-	if (dx > dy)
-		n = ABS(dx);
-	else
-		n = ABS(dy);
-	dx /= n;
-	dy /= n;
-	pos = new_pos(start->x, start->y, 0);
-	while (n--)
-	{
-		pos->x += dx;
-		pos->y += dy;
-		mlx_pixel_put(env->mlx, env->win, pos->x, pos->y, color);
-	}
-	free(pos);
+	dx = ABS(end->x - start->x);
+    dy = ABS(end->y - start->y);
+
+    if (dx >= dy)
+		pixel = dx;
+    else
+		pixel = dy;
+
+    dx = dx / pixel;
+    dy = dy / pixel;
+
+    x = start->x;
+    y = start->y;
+
+    i = 1;
+    while (i <= pixel)
+    {
+          mlx_pixel_put(env->mlx, env->win, x, y, color);
+          x = x + dx;
+          y = y + dy;
+          i++;
+    }
 }
 
 t_pos		*new_pos(int x, int y, int z)

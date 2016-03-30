@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 10:07:19 by tguillem          #+#    #+#             */
-/*   Updated: 2016/01/20 15:18:49 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/03/30 11:37:26 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct	s_pos
 	int			z;
 }				t_pos;
 
-void			draw_quad(t_env *env, t_pos *pos, int size, int color);
 void			draw_line_2d(t_env *env, t_pos *start, t_pos *end, int color);
+void			draw_line_3d(t_env *env, t_pos *start, t_pos *end, int color);
 t_pos			*new_pos(int x, int y, int z);
 int				expose_hook(void *param);
 #endif

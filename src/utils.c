@@ -6,68 +6,43 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 09:59:30 by tguillem          #+#    #+#             */
-/*   Updated: 2016/01/20 15:18:33 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/03/30 11:34:14 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void		draw_quad(t_env *env, t_pos *pos, int size, int color)
+void		internal_draw_line2d(t_env *env, int *data)
 {
-	int i;
-	int j;
-	int x;
-	int y;
+	int		x;
+	int		y;
+	int		i;
 
+	x = data[3];
+	y = data[4];
 	i = 1;
-	while (i <= size)
+	while (i <= data[2])
 	{
-		j = 1;
-		while (j <= size)
-		{
-			if (i == 1 || i == size || j == 1 || j == size)
-			{
-				x = PROJ_X(pos->x + i, pos->y + j, pos->z);
-				y = PROJ_Y(pos->x, pos->y + j, pos->z);
-				mlx_pixel_put(env->mlx, env->win, x, y, color);
-			}
-			j++;
-		}
+		mlx_pixel_put(env->mlx, env->win, x, y, data[5]);
+		x += data[0];
+		y += data[1];
 		i++;
 	}
 }
 
 void		draw_line_2d(t_env *env, t_pos *start, t_pos *end, int color)
 {
-	int			dx;
-	int			dy;
-	int			x;
-	int			y;
-	int			i;
-	int			pixel;
+	int		data[6];
 
-	dx = ABS(end->x - start->x);
-    dy = ABS(end->y - start->y);
-
-    if (dx >= dy)
-		pixel = dx;
-    else
-		pixel = dy;
-
-    dx = dx / pixel;
-    dy = dy / pixel;
-
-    x = start->x;
-    y = start->y;
-
-    i = 1;
-    while (i <= pixel)
-    {
-          mlx_pixel_put(env->mlx, env->win, x, y, color);
-          x = x + dx;
-          y = y + dy;
-          i++;
-    }
+	data[0] = ABS(end->x - start->x);
+	data[1] = ABS(end->y - start->y);
+	data[2] = data[0] >= data[1] ? data[0] : data[1];
+	data[0] /= data[2];
+	data[1] /= data[2];
+	data[3] = start->x;
+	data[4] = start->y;
+	data[5] = color;
+	internal_draw_line2d(env, data);
 }
 
 t_pos		*new_pos(int x, int y, int z)

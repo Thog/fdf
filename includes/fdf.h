@@ -6,17 +6,20 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 10:07:19 by tguillem          #+#    #+#             */
-/*   Updated: 2016/03/30 11:37:26 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/03/30 15:58:16 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-# define ABS(X) X < 0 ? (-X) : X
 # define PROJ_X(X, Y, Z) ((X/2) - (Y/2) + 200)
 # define PROJ_Y(X, Y, Z) (-(Z/2) + (X/4) + (Y/4) + 100)
+# define SWAP(a, b) do{ __typeof__(a) tmp;  tmp = a; a = b; b = tmp; }while(0)
+# define ISO_C1 0.5F
+# define ISO_C2 0.5F
 # include <mlx.h>
 # include <stdlib.h>
+# include "libft.h"
 
 typedef struct	s_env
 {
@@ -31,6 +34,12 @@ typedef struct	s_pos
 	int			z;
 }				t_pos;
 
+typedef int		(*t_transformer)(int x, int y, int z);
+
+int				proj_dummy_x(int x, int y, int z);
+int				proj_dummy_y(int x, int y, int z);
+int				proj_iso_x(int x, int y, int z);
+int				proj_iso_y(int x, int y, int z);
 void			draw_line_2d(t_env *env, t_pos *start, t_pos *end, int color);
 void			draw_line_3d(t_env *env, t_pos *start, t_pos *end, int color);
 t_pos			*new_pos(int x, int y, int z);

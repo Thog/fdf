@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   projections.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/04 09:07:04 by tguillem          #+#    #+#             */
-/*   Updated: 2016/03/30 15:48:49 by tguillem         ###   ########.fr       */
+/*   Created: 2016/03/30 12:02:51 by tguillem          #+#    #+#             */
+/*   Updated: 2016/03/30 15:58:44 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		main(void)
+int		proj_dummy_x(int x, int y, int z)
 {
-	t_env	*env;
+	(void)y;
+	(void)z;
+	return (x);
+}
 
-	if (!(env = malloc(sizeof(t_env))) ||
-			!(env->mlx = mlx_init()) ||
-			!(env->win = mlx_new_window(env->mlx, 1366, 768, "fdf")))
-		return (1);
-	mlx_expose_hook(env->win, expose_hook, env);
-	mlx_loop(env->mlx);
-	free(env);
-	return (0);
+int		proj_dummy_y(int x, int y, int z)
+{
+	(void)x;
+	(void)z;
+	return (y);
+}
+
+int		proj_iso_x(int x, int y, int z)
+{
+	(void)z;
+	return (ISO_C1 * x - ISO_C2 * y);
+}
+
+int		proj_iso_y(int x, int y, int z)
+{
+	return (z + ((ISO_C1 * x) / 2) + ((ISO_C2 * y) / 2));
 }

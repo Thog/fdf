@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 09:59:30 by tguillem          #+#    #+#             */
-/*   Updated: 2016/04/14 07:45:02 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/04/14 10:00:30 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,25 @@ t_pos		*new_pos(int x, int y, int z)
 	result->x = x;
 	result->y = y;
 	result->z = z;
+	return (result);
+}
+
+t_posdata	*data_put(t_posdata *root, t_pos *array)
+{
+	t_posdata		*result;
+	t_posdata		*tmp;
+
+	tmp = root;
+	if (!(result = (t_posdata*)ft_memalloc(sizeof(t_posdata))))
+		return (NULL);
+	result->data = array;
+	result->next = NULL;
+	if (tmp)
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = result;
+		return (root);
+	}
 	return (result);
 }

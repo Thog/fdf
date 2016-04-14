@@ -6,24 +6,33 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 07:38:22 by tguillem          #+#    #+#             */
-/*   Updated: 2016/04/14 07:40:44 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/04/14 10:28:16 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	parse_file(char *file)
+static int	parse_file(char *file, t_env *e)
 {
 	int		fd;
-	int		ret;
+	int		i;
 	char	*line;
+	char	**tmp;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (ft_error_retint("File not found\n", 1));
-	while ((ret = get_next_line(fd, &line)) == 1)
+	while ((i = get_next_line(fd, &line)) == 1)
 	{
-		ft_printf("Line: %s\n", line);
+		e->y++;
+		tmp = ft_strsplit(line, ' ');
+		i = 0;
+		while (*(tmp + i))
+		{
+			e->data = data_put(e->data, new_pos(i, e->y, ft_atoi(tmp[i])));
+			i++;
+		}
+		e->x = i;
 	}
 	return (0);
 }
@@ -32,9 +41,12 @@ int			init_data(t_env *env, int ac, char **av)
 {
 	int	ret;
 
+	env->x = 0;
+	env->y = 0;
+	env->data = NULL;
 	if (ac != 2)
 		return (ft_error_retint("Invalid args\nUsage: ./fdf file.fdf\n", 1));
-	if ((ret = parse_file(av[1])))
+	if ((ret = parse_file(av[1], env)))
 		return (1);
 	(void)env;
 	return (0);

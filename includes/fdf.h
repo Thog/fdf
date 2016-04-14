@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 10:07:19 by tguillem          #+#    #+#             */
-/*   Updated: 2016/04/14 07:43:04 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/04/14 10:45:35 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,27 @@
 # include <fcntl.h>
 # include "libft.h"
 
-typedef struct	s_env
+typedef struct		s_pos
 {
-	void		*mlx;
-	void		*win;
-}				t_env;
+	int				x;
+	int				y;
+	int				z;
+}					t_pos;
 
-typedef struct	s_pos
+typedef struct		s_posdata
 {
-	int			x;
-	int			y;
-	int			z;
-}				t_pos;
+	t_pos			*data;
+	struct s_posdata	*next;
+}					t_posdata;
+
+typedef struct		s_env
+{
+	void			*mlx;
+	void			*win;
+	int				x;
+	int				y;
+	t_posdata		*data;
+}					t_env;
 
 typedef int		(*t_transformer)(int x, int y, int z);
 
@@ -47,4 +56,6 @@ t_pos			*new_pos(int x, int y, int z);
 int				expose_hook(void *param);
 int				init_display(t_env *env);
 int				init_data(t_env *env, int ac, char **av);
+t_posdata		*data_put(t_posdata *root, t_pos *array);
+t_pos			*get_pos(t_posdata *data, int x, int y, int z);
 #endif

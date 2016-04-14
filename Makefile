@@ -6,7 +6,7 @@
 #    By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/02 17:03:41 by tguillem          #+#    #+#              #
-#    Updated: 2016/03/30 15:24:53 by tguillem         ###   ########.fr        #
+#    Updated: 2016/04/14 07:35:29 by tguillem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 NAME = fdf
 LIB = libft
-SRC = main.c utils.c hooks.c projections.c
+SRC = main.c utils.c hooks.c projections.c display.c parser.c
 SRCDIR = src
 OUTDIR = out
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))

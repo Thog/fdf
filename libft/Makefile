@@ -6,7 +6,7 @@
 #    By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/07/21 12:17:37 by tguillem          #+#    #+#              #
-#    Updated: 2016/03/23 16:22:21 by tguillem         ###   ########.fr        #
+#    Updated: 2016/03/30 10:22:30 by tguillem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC = ft_memset.c ft_bzero.c ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c \
 	  ft_lstiter.c ft_lstsize.c ft_lstmap.c ft_iswhitespace.c ft_isblank.c \
 	  ft_strtrimch.c ft_strtrimcmp.c ft_islower.c ft_isupper.c ft_max.c \
 	  ft_putnbrbase.c ft_wstrlen.c ft_putwchar.c ft_putwstr.c ft_min.c \
-	  ft_itoa_base.c get_next_line.c ft_time.c ft_count_digit.c \
+	  ft_itoa_base.c get_next_line.c ft_time.c ft_count_digit.c ft_isstralnum.c\
 	  ft_putwchar_fd.c ft_putwstr_fd.c ft_printf/ft_nbrlen.c \
 	  ft_printf/ft_printf.c ft_printf/ft_printu.c \
 	  ft_printf/internal_printf.c ft_printf/manage_number.c \
@@ -39,8 +39,6 @@ SRC = ft_memset.c ft_bzero.c ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c \
 OBJ = $(SRC:.c=.o)
 REMOVE = $(OBJ)
 
-all: $(NAME)
-
 %.o : %.c
 	@$(CC) $(CFLAGS) -o $@ -c $<
 	@echo "libft> Building $<..."
@@ -48,6 +46,8 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
+
+all: $(NAME)
 
 clean:
 	@/bin/rm -f $(REMOVE)

@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   projections.c                                      :+:      :+:    :+:   */
+/*   ft_isstralnum.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/30 12:02:51 by tguillem          #+#    #+#             */
-/*   Updated: 2016/04/14 07:44:29 by tguillem         ###   ########.fr       */
+/*   Created: 2016/03/30 10:20:07 by tguillem          #+#    #+#             */
+/*   Updated: 2016/03/30 10:27:47 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int		proj_dummy_x(t_pos *pos)
+int				ft_isstralnum(char *str)
 {
-	return (pos->x);
-}
-
-int		proj_dummy_y(t_pos *pos)
-{
-	return (pos->y);
-}
-
-int		proj_iso_x(t_pos *pos)
-{
-	return (ISO_C1 * pos->x - ISO_C2 * pos->y);
-}
-
-int		proj_iso_y(t_pos *pos)
-{
-	return (pos->z + ((ISO_C1 * pos->x) / 2) + ((ISO_C2 * pos->y) / 2));
+	if (!str || !*str)
+		return (0);
+	while (*str)
+		if (!ft_isalnum(*str++))
+			return (0);
+	return (1);
 }

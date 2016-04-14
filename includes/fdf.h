@@ -17,8 +17,9 @@
 # define SWAP(a, b) do{ __typeof__(a) tmp;  tmp = a; a = b; b = tmp; }while(0)
 # define ISO_C1 0.5F
 # define ISO_C2 0.5F
-# include <mlx.h>
-# include <stdlib.h>
+# include "mlx.h"
+# include <unistd.h>
+# include <fcntl.h>
 # include "libft.h"
 
 typedef struct	s_env
@@ -44,4 +45,6 @@ void			draw_line_2d(t_env *env, t_pos *start, t_pos *end, int color);
 void			draw_line_3d(t_env *env, t_pos *start, t_pos *end, int color);
 t_pos			*new_pos(int x, int y, int z);
 int				expose_hook(void *param);
+int       init_display(t_env *env);
+int				init_data(t_env *env, int ac, char **av);
 #endif

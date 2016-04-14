@@ -12,16 +12,13 @@
 
 #include "fdf.h"
 
-int		main(void)
+int		main(int ac, char **av)
 {
 	t_env	*env;
 
-	if (!(env = malloc(sizeof(t_env))) ||
-			!(env->mlx = mlx_init()) ||
-			!(env->win = mlx_new_window(env->mlx, 1366, 768, "fdf")))
+	if (!(env = malloc(sizeof(t_env))) || init_data(env, ac, av))
 		return (1);
-	mlx_expose_hook(env->win, expose_hook, env);
-	mlx_loop(env->mlx);
+	init_display(env);
 	free(env);
 	return (0);
 }

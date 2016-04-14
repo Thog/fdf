@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 09:59:30 by tguillem          #+#    #+#             */
-/*   Updated: 2016/04/14 10:00:30 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/04/14 11:01:20 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void		draw_line_3d(t_env *env, t_pos *start, t_pos *end, int color)
 	t_pos	*tmp1;
 	t_pos	*tmp2;
 
+	if (!start || !end)
+		return ;
 	tmp1 = new_pos(proj_iso_x(start), proj_iso_y(start), 0);
 	tmp2 = new_pos(proj_iso_x(end), proj_iso_y(end), 0);
 	draw_line_2d(env, tmp1, tmp2, color);

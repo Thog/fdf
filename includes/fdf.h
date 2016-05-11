@@ -12,13 +12,14 @@
 
 #ifndef FDF_H
 # define FDF_H
-# define SWAP(a, b) do{ __typeof__(a) tmp;  tmp = a; a = b; b = tmp; }while(0)
 # define ISO_C1 0.5F
 # define ISO_C2 0.5F
-# include <mlx.h>
+# define W_SC 60
+# define H_SC 5
 # include <unistd.h>
 # include <fcntl.h>
 # include "libft.h"
+# include <mlx.h>
 
 typedef struct		s_pos
 {

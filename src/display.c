@@ -24,13 +24,16 @@ int			init_display(t_env *env)
 
 t_pos		*get_pos(t_posdata *data, int x, int y)
 {
-	t_pos	*tmp;
+	t_pos		*tmp;
 
+	ft_printf("Trying to get pos struct of %i, %i (data: %p)\n", x, y, data);
 	while (data)
 	{
 		tmp = data->data;
 		if (tmp->x == x && tmp->y == y)
+		{
 			return (tmp);
+		}
 		data = data->next;
 	}
 	return (NULL);

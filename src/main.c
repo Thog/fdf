@@ -16,7 +16,7 @@ int		main(int ac, char **av)
 {
 	t_env	*env;
 
-	if (!(env = malloc(sizeof(t_env))) || init_data(env, ac, av))
+	if (!(env = (t_env*)malloc(sizeof(t_env))) || init_data(env, ac, av))
 		return (1);
 	init_display(env);
 	free(env);

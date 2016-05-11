@@ -24,7 +24,6 @@ static int	parse_file(char *file, t_env *e)
 		return (ft_error_retint("File not found\n", 1));
 	while ((i = get_next_line(fd, &line)) == 1)
 	{
-		e->y++;
 		tmp = ft_strsplit(line, ' ');
 		i = 0;
 		while (*(tmp + i))
@@ -33,6 +32,7 @@ static int	parse_file(char *file, t_env *e)
 			i++;
 		}
 		e->x = i;
+		e->y++;
 	}
 	return (0);
 }

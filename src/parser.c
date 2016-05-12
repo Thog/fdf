@@ -46,8 +46,7 @@ int			init_data(t_env *env, int ac, char **av)
 	env->data = NULL;
 	if (ac != 2)
 		return (ft_error_retint("Invalid args\nUsage: ./fdf file.fdf\n", 1));
-	if ((ret = parse_file(av[1], env)))
+	if ((ret = parse_file(av[1], env)) || !(env->modifier = new_pos(0, 0, 0)))
 		return (1);
-	(void)env;
 	return (0);
 }

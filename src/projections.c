@@ -29,5 +29,5 @@ int		proj_iso_x(t_pos *pos)
 
 int		proj_iso_y(t_pos *pos)
 {
-	return (pos->z + ((ISO_C1 * pos->x) / 2) + ((ISO_C2 * pos->y) / 2));
+	return (-pos->z + (ISO_C1 / 2) * pos->x + (ISO_C2 / 2) * pos->y);
 }

@@ -17,9 +17,10 @@
 # define W_SC 60
 # define H_SC 5
 # include <unistd.h>
+# include <stdlib.h>
+# include <mlx.h>
 # include <fcntl.h>
 # include "libft.h"
-# include <mlx.h>
 
 typedef struct		s_pos
 {
@@ -41,6 +42,7 @@ typedef struct		s_env
 	int				x;
 	int				y;
 	t_posdata		*data;
+	t_pos			*modifier;
 }					t_env;
 
 typedef int		(*t_transformer)(int x, int y, int z);
@@ -53,6 +55,7 @@ void			draw_line_2d(t_env *env, t_pos *start, t_pos *end, int color);
 void			draw_line_3d(t_env *env, t_pos *start, t_pos *end, int color);
 t_pos			*new_pos(int x, int y, int z);
 int				expose_hook(void *param);
+int				key_hook(int keycode,void *param);
 int				init_display(t_env *env);
 int				init_data(t_env *env, int ac, char **av);
 t_posdata		*data_put(t_posdata *root, t_pos *array);

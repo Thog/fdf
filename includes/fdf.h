@@ -6,21 +6,32 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 10:07:19 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/13 08:52:36 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/13 09:10:00 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-# define ISO_C1 0.5F
-# define ISO_C2 0.5F
-# define W_SC 60
-# define H_SC 5
 # include <unistd.h>
 # include <stdlib.h>
 # include <mlx.h>
 # include <fcntl.h>
 # include "libft.h"
+# define ISO_C1 0.5F
+# define ISO_C2 0.5F
+# define W_SC 60
+# define H_SC 5
+# ifdef __APPLE__
+#  define ARROW_OFFSET 122
+#  define ESCAPE 53
+# else
+#  define ARROW_OFFSET 65360
+#  define ESCAPE 65307
+# endif
+# define ARROW_LEFT ARROW_OFFSET + 1
+# define ARROW_RIGHT ARROW_OFFSET + 2
+# define ARROW_DOWN ARROW_OFFSET + 3
+# define ARROW_UP ARROW_OFFSET + 4
 
 typedef struct			s_pos
 {

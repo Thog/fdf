@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 10:41:55 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/13 08:53:30 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/13 09:09:08 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,18 +96,18 @@ int		key_hook(int keycode, void *param)
 	env = (t_env*)param;
 	if (env)
 	{
-		if (keycode == 65362)
+		if (keycode == ARROW_DOWN)
 			env->modifier->y += 10;
-		else if (keycode == 65364)
+		else if (keycode == ARROW_UP)
 			env->modifier->y -= 10;
-		else if (keycode == 65363)
+		else if (keycode == ARROW_RIGHT)
 			env->modifier->x += 10;
-		else if (keycode == 65361)
+		else if (keycode == ARROW_LEFT)
 			env->modifier->x -= 10;
-		if (keycode > 65360 && keycode < 65365)
+		if (keycode > ARROW_OFFSET && keycode < (ARROW_OFFSET + 5))
 			expose_hook(param);
 	}
-	if (keycode == 65307)
+	if (keycode == ESCAPE)
 		exit(EXIT_SUCCESS);
 	return (env == NULL);
 }

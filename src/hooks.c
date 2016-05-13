@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 10:41:55 by tguillem          #+#    #+#             */
-/*   Updated: 2016/04/14 11:00:41 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/13 08:53:30 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	display_vertical(t_env *env)
 
 	i = 0;
 	j = 0;
-
 	while ((tmp1 = get_pos(env->data, i, j)))
 	{
 		j = 0;
-		while ((tmp1 = get_and_transform_pos(env, i, j)) && (tmp2 = get_and_transform_pos(env, i, j + 1)))
+		while ((tmp1 = get_and_transform_pos(env, i, j)) &&
+			(tmp2 = get_and_transform_pos(env, i, j + 1)))
 		{
 			draw_line_3d(env, tmp1, tmp2, 0xFFFFFF);
 			free(tmp1);
@@ -60,11 +60,11 @@ void	display_horizontal(t_env *env)
 
 	i = 0;
 	j = 0;
-
 	while ((tmp1 = get_pos(env->data, i, j)))
 	{
 		i = 0;
-		while ((tmp1 = get_and_transform_pos(env, i, j)) && (tmp2 = get_and_transform_pos(env, i + 1, j)))
+		while ((tmp1 = get_and_transform_pos(env, i, j)) &&
+			(tmp2 = get_and_transform_pos(env, i + 1, j)))
 		{
 			draw_line_3d(env, tmp1, tmp2, 0xFFFFFF);
 			free(tmp1);
@@ -104,7 +104,6 @@ int		key_hook(int keycode, void *param)
 			env->modifier->x += 10;
 		else if (keycode == 65361)
 			env->modifier->x -= 10;
-
 		if (keycode > 65360 && keycode < 65365)
 			expose_hook(param);
 	}

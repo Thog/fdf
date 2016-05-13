@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 07:38:22 by tguillem          #+#    #+#             */
-/*   Updated: 2016/04/14 10:28:16 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/13 08:50:33 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int			init_data(t_env *env, int ac, char **av)
 	env->data = NULL;
 	if (ac != 2)
 		return (ft_error_retint("Invalid args\nUsage: ./fdf file.fdf\n", 1));
-	if ((ret = parse_file(av[1], env)) || !(env->modifier = new_pos(0, 0, 0)))
+	if ((ret = parse_file(av[1], env)) ||
+		!(env->modifier = new_pos(0, 0, 0)))
 		return (1);
 	return (0);
 }

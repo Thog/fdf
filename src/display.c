@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 07:38:44 by tguillem          #+#    #+#             */
-/*   Updated: 2016/04/14 10:59:13 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/13 15:02:43 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int			init_display(t_env *env)
 {
 	if (!(env->mlx = mlx_init()) ||
-			!(env->win = mlx_new_window(env->mlx, 1366, 768, "fdf")))
+			!(env->win = mlx_new_window(env->mlx, WIDTH, HEIGHT, "fdf")))
 		return (1);
 	mlx_key_hook(env->win, key_hook, env);
 	mlx_expose_hook(env->win, expose_hook, env);

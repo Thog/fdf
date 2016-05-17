@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 10:07:19 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/13 09:10:00 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/13 15:54:03 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@
 # include <mlx.h>
 # include <fcntl.h>
 # include "libft.h"
+# define WIDTH 1366
+# define HEIGHT 768
 # define ISO_C1 0.5F
 # define ISO_C2 0.5F
 # define W_SC 60
 # define H_SC 5
+# define W_LIMIT (WIDTH / W_SC) + W_SC
+# define H_LIMIT (HEIGHT / H_SC) + H_SC
 # ifdef __APPLE__
 #  define ARROW_OFFSET 122
 #  define ESCAPE 53

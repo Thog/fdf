@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 10:41:55 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/13 09:09:08 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/17 12:38:43 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_pos	*get_and_transform_pos(t_env *env, int x, int y)
 		pos = new_pos(x, y, pos->z);
 	if (pos)
 	{
-		pos->x = pos->x * W_SC + W_SC + 1000 + env->modifier->x;
-		pos->y = pos->y * W_SC + W_SC + env->modifier->y;
+		pos->x = (pos->x + env->modifier->x) * W_SC + W_SC + 1000;
+		pos->y = (pos->y + env->modifier->y) * W_SC + W_SC;
 		pos->z = pos->z * H_SC;
 	}
 	return (pos);
@@ -97,13 +97,13 @@ int		key_hook(int keycode, void *param)
 	if (env)
 	{
 		if (keycode == ARROW_DOWN)
-			env->modifier->y += 10;
+			env->modifier->y++;
 		else if (keycode == ARROW_UP)
-			env->modifier->y -= 10;
+			env->modifier->y--;
 		else if (keycode == ARROW_RIGHT)
-			env->modifier->x += 10;
+			env->modifier->x++;
 		else if (keycode == ARROW_LEFT)
-			env->modifier->x -= 10;
+			env->modifier->x--;
 		if (keycode > ARROW_OFFSET && keycode < (ARROW_OFFSET + 5))
 			expose_hook(param);
 	}

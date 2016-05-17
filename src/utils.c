@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 09:59:30 by tguillem          #+#    #+#             */
-/*   Updated: 2016/04/14 11:01:20 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/17 14:40:50 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void		draw_line_2d(t_env *env, t_pos *p1, t_pos *p2, int color)
 	ft_bzero(error, sizeof(error));
 	while (++i < n)
 	{
-		mlx_pixel_put(env->mlx, env->win, nbr[0], nbr[1], color);
+		if (put_pixel(env, nbr[0], nbr[1], color))
+			break ;
 		error[0] += delta[0];
 		error[1] += delta[1];
 		draw_line1(nbr, error, p2, n);
@@ -61,7 +62,8 @@ void		draw_line_3d(t_env *env, t_pos *start, t_pos *end, int color)
 		return ;
 	tmp1 = new_pos(proj_iso_x(start), proj_iso_y(start), 0);
 	tmp2 = new_pos(proj_iso_x(end), proj_iso_y(end), 0);
-	draw_line_2d(env, tmp1, tmp2, color);
+	if (tmp1->x >= 0 && tmp2->x >= 0 && tmp1->y >= 0 && tmp2->y >= 0)
+		draw_line_2d(env, tmp1, tmp2, color);
 	free(tmp1);
 	free(tmp2);
 }

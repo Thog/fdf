@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 10:07:19 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/13 15:54:03 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/17 14:40:41 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,5 @@ int						init_display(t_env *env);
 int						init_data(t_env *env, int ac, char **av);
 t_posdata				*data_put(t_posdata *root, t_pos *array);
 t_pos					*get_pos(t_posdata *data, int x, int y);
+int						put_pixel(t_env *env, int x, int y, int color);
 #endif

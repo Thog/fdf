@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-int		get_and_transform_pos(t_env *env, t_pos *pos, int x, int y)
+t_pos	*get_and_transform_pos(t_env *env, t_pos *pos, int x, int y)
 {
 	t_pos	*tmp;
 
@@ -22,11 +22,12 @@ int		get_and_transform_pos(t_env *env, t_pos *pos, int x, int y)
 		pos->x = (tmp->x + env->modifier->x) * W_SC + W_SC + 1000;
 		pos->y = (tmp->y + env->modifier->y) * W_SC + W_SC;
 		pos->z = tmp->z * H_SC;
+		return (pos);
 	}
-	return (tmp != NULL);
+	return (tmp);
 }
 
-void	display_vertical(t_env *env)
+void	render(t_env *env, t_pos *tmp3, t_pos *tmp4)
 {
 	t_pos		*tmp1;
 	t_pos		*tmp2;
@@ -35,59 +36,39 @@ void	display_vertical(t_env *env)
 
 	i = 0;
 	j = 0;
-	tmp1 = new_pos(0, 0, 0);
-	tmp2 = new_pos(0, 0, 0);
-	while (get_pos(env->data, i, j) && tmp1 && tmp2)
-	{
-		j = 0;
-		while (get_and_transform_pos(env, tmp1, i, j) &&
-			get_and_transform_pos(env, tmp2, i, j + 1))
-		{
-			draw_line_3d(env, tmp1, tmp2, 0xFFFFFF);
-			++j;
-		}
-		++i;
-	}
-	ft_memdel((void **)&tmp1);
-	ft_memdel((void **)&tmp2);
-}
-
-void	display_horizontal(t_env *env)
-{
-	t_pos		*tmp1;
-	t_pos		*tmp2;
-	int			i;
-	int			j;
-
-	i = 0;
-	j = 0;
-	tmp1 = new_pos(0, 0, 0);
-	tmp2 = new_pos(0, 0, 0);
-	while (get_pos(env->data, i, j))
+	tmp1 = NULL;
+	tmp2 = NULL;
+	while (j < env->y)
 	{
 		i = 0;
-		while ((get_and_transform_pos(env, tmp1, i, j)) &&
-				get_and_transform_pos(env, tmp2, i + 1, j))
+		while (i < env->width)
 		{
-			draw_line_3d(env, tmp1, tmp2, 0xFFFFFF);
+			tmp1 = get_and_transform_pos(env, tmp3, i, j);
+			tmp2 = get_and_transform_pos(env, tmp4, i + 1, j);
+			draw_line_3d(env, tmp1, tmp2, 0x28112D);
+			tmp2 = get_and_transform_pos(env, tmp4, i, j + 1);
+			draw_line_3d(env, tmp1, tmp2, 0x28112D);
 			++i;
 		}
 		++j;
 	}
-	ft_memdel((void **)&tmp1);
-	ft_memdel((void **)&tmp2);
 }
 
 int		expose_hook(void *param)
 {
 	t_env		*env;
+	t_pos		*cache_1;
+	t_pos		*cache_2;
 
+	cache_1 = new_pos(0, 0, 0);
+	cache_2 = new_pos(0, 0, 0);
 	env = (t_env*)param;
-	if (env)
+	if (env && cache_1 && cache_2)
 	{
 		mlx_clear_window(env->mlx, env->win);
-		display_horizontal(env);
-		display_vertical(env);
+		render(env, cache_1, cache_2);
+		ft_memdel((void **)&cache_1);
+		ft_memdel((void **)&cache_2);
 	}
 	return (env == NULL);
 }

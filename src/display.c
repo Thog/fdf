@@ -31,9 +31,7 @@ t_pos		*get_pos(t_posdata *data, int x, int y)
 	{
 		tmp = data->data;
 		if (tmp->x == x && tmp->y == y)
-		{
 			return (tmp);
-		}
 		data = data->next;
 	}
 	return (NULL);

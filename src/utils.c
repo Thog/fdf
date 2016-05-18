@@ -45,8 +45,7 @@ void		draw_line_2d(t_env *env, t_pos *p1, t_pos *p2, int color)
 	ft_bzero(error, sizeof(error));
 	while (++i < n)
 	{
-		if (put_pixel(env, nbr[0], nbr[1], color))
-			break ;
+		put_pixel(env, nbr[0], nbr[1], color + 0x020202 * ft_min(i, W_SC));
 		error[0] += delta[0];
 		error[1] += delta[1];
 		draw_line1(nbr, error, p2, n);
@@ -60,10 +59,9 @@ void		draw_line_3d(t_env *env, t_pos *start, t_pos *end, int color)
 
 	if (!start || !end)
 		return ;
-	tmp1 = new_pos(proj_iso_x(start), proj_iso_y(start), 0);
-	tmp2 = new_pos(proj_iso_x(end), proj_iso_y(end), 0);
-	if (tmp1->x >= 0 && tmp2->x >= 0 && tmp1->y >= 0 && tmp2->y >= 0)
-		draw_line_2d(env, tmp1, tmp2, color);
+	tmp1 = new_pos(proj_iso_x(start), proj_iso_y(start), start->z);
+	tmp2 = new_pos(proj_iso_x(end), proj_iso_y(end), end->z);
+	draw_line_2d(env, tmp1, tmp2, color);
 	free(tmp1);
 	free(tmp2);
 }

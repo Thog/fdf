@@ -12,6 +12,14 @@
 
 #include "fdf.h"
 
+static void	update_info(t_env *e, int x)
+{
+		e->x = x;
+		e->y++;
+		if (e->x > e->width)
+			e->width = e->x;
+}
+
 static int	parse_file(char *file, t_env *e)
 {
 	int		fd;
@@ -29,11 +37,12 @@ static int	parse_file(char *file, t_env *e)
 		while (*(tmp + i))
 		{
 			e->data = data_put(e->data, new_pos(i, e->y, ft_atoi(tmp[i])));
-			i++;
+			++i;
 		}
-		e->x = i;
-		e->y++;
+		update_info(e, i);
 	}
+	e->width++;
+	ft_printf("Map Size, x: %i, y: %i\n", e->width, e->y);
 	return (0);
 }
 
@@ -43,6 +52,7 @@ int			init_data(t_env *env, int ac, char **av)
 
 	env->x = 0;
 	env->y = 0;
+	env->width = 0;
 	env->data = NULL;
 	if (ac != 2)
 		return (ft_error_retint("Invalid args\nUsage: ./fdf file.fdf\n", 1));

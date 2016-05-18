@@ -28,14 +28,17 @@
 # ifdef __APPLE__
 #  define ARROW_OFFSET 122
 #  define ESCAPE 53
+#  define ARROW_RIGHT ARROW_OFFSET + 2
+#  define ARROW_DOWN ARROW_OFFSET + 3
+#  define ARROW_UP ARROW_OFFSET + 4
 # else
 #  define ARROW_OFFSET 65360
+#  define ARROW_RIGHT ARROW_OFFSET + 3
+#  define ARROW_UP ARROW_OFFSET + 2
+#  define ARROW_DOWN ARROW_OFFSET + 4
 #  define ESCAPE 65307
 # endif
 # define ARROW_LEFT ARROW_OFFSET + 1
-# define ARROW_RIGHT ARROW_OFFSET + 2
-# define ARROW_DOWN ARROW_OFFSET + 3
-# define ARROW_UP ARROW_OFFSET + 4
 
 typedef struct			s_pos
 {

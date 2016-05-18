@@ -59,6 +59,7 @@ typedef struct			s_env
 	void				*win;
 	int					x;
 	int					y;
+	int					width;
 	t_posdata			*data;
 	t_pos				*modifier;
 }						t_env;

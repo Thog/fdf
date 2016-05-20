@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 07:38:22 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/13 16:39:26 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/20 11:12:47 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	update_info(t_env *e, int x)
 {
-		e->x = x;
-		e->y++;
-		if (e->x > e->width)
-			e->width = e->x;
+	e->x = x;
+	e->y++;
+	if (e->x > e->width)
+		e->width = e->x;
 }
 
 static int	parse_file(char *file, t_env *e)

@@ -24,6 +24,10 @@ ssize_t	ft_printf_manage_wchar(char **format, va_list *args, t_data *data)
 		len = 1;
 	else if (chr <= 0x7FF)
 		len = 2;
+	else if (chr <= 0xFFFF)
+		len = 3;
+	else if (chr <= 0x10FFFF)
+		len = 4;
 	if (data->got_width && !data->right_pad)
 		ft_printf_width_pad(len, data->width, data->zero_pad ? '0' : ' ',
 				data->fd);

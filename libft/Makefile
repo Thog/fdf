@@ -6,12 +6,12 @@
 #    By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/07/21 12:17:37 by tguillem          #+#    #+#              #
-#    Updated: 2016/04/14 09:08:44 by tguillem         ###   ########.fr        #
+#    Updated: 2016/05/20 12:17:09 by tguillem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -g -Wextra -Wall -Werror -march=native -I./
-CC = gcc
+CFLAGS = -g -Wextra -Wall -Werror -O3 -march=native -I./
+CC = clang
 
 NAME = libft.a
 SRC = ft_memset.c ft_bzero.c ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c \

@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 10:07:19 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/17 14:40:41 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/20 15:31:14 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ int						proj_dummy_x(t_pos *pos);
 int						proj_dummy_y(t_pos *pos);
 int						proj_iso_x(t_pos *pos);
 int						proj_iso_y(t_pos *pos);
-void					draw_line_2d(t_env *env, t_pos *start, t_pos *end,
+int						draw_line_2d(t_env *env, t_pos *start, t_pos *end,
 	int color);
-void					draw_line_3d(t_env *env, t_pos *start, t_pos *end,
+int						draw_line_3d(t_env *env, t_pos *start, t_pos *end,
 	int color);
 t_pos					*new_pos(int x, int y, int z);
 int						expose_hook(void *param);

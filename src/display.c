@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 07:38:44 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/17 14:40:20 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/20 15:47:23 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ t_pos		*get_pos(t_posdata *data, int x, int y)
 
 int			put_pixel(t_env *env, int x, int y, int color)
 {
-	if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
-		return (1);
+	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+		return (0);
 	mlx_pixel_put(env->mlx, env->win, x, y, color);
-	return (0);
+	return (1);
 }

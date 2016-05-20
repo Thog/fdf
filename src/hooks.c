@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 10:41:55 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/17 12:59:24 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/20 16:12:02 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,37 @@ t_pos	*get_and_transform_pos(t_env *env, t_pos *pos, int x, int y)
 	return (tmp);
 }
 
+int		draw_quad(t_env *env, t_pos *cache, int x, int y)
+{
+	t_pos	*tmp1;
+	t_pos	*tmp2;
+	int		ret;
+
+	ret = 1;
+	tmp1 = get_and_transform_pos(env, cache, x, y);
+	tmp2 = get_and_transform_pos(env, cache + 1, x + 1, y);
+	ret = draw_line_3d(env, tmp1, tmp2, 0x28112D);
+	tmp2 = get_and_transform_pos(env, cache + 1, x, y + 1);
+	ret += draw_line_3d(env, tmp1, tmp2, 0x28112D);
+	return (ret);
+}
+
 void	render(t_env *env, t_pos *tmp3, t_pos *tmp4)
 {
-	t_pos		*tmp1;
-	t_pos		*tmp2;
+	t_pos		tmp[2];
 	int			i;
 	int			j;
 
+	tmp[0] = *tmp3;
+	tmp[1] = *tmp4;
 	i = 0;
 	j = 0;
-	tmp1 = NULL;
-	tmp2 = NULL;
 	while (j < env->y)
 	{
 		i = 0;
 		while (i < env->width)
 		{
-			tmp1 = get_and_transform_pos(env, tmp3, i, j);
-			tmp2 = get_and_transform_pos(env, tmp4, i + 1, j);
-			draw_line_3d(env, tmp1, tmp2, 0x28112D);
-			tmp2 = get_and_transform_pos(env, tmp4, i, j + 1);
-			draw_line_3d(env, tmp1, tmp2, 0x28112D);
+			draw_quad(env, tmp, i, j);
 			++i;
 		}
 		++j;

@@ -6,13 +6,13 @@
 #    By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/02 17:03:41 by tguillem          #+#    #+#              #
-#    Updated: 2016/04/14 07:35:29 by tguillem         ###   ########.fr        #
+#    Updated: 2016/05/20 15:39:20 by tguillem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -g -Wall -Wextra -Werror -I./includes
+CFLAGS = -g -Wall -Wextra -Werror -O0 -march=native -I./includes
 PRGFLAGS = -lft -lmlx -framework OpenGL -framework AppKit
-CC = gcc
+CC = clang
 
 NAME = fdf
 LIB = libft
@@ -21,26 +21,27 @@ SRCDIR = src
 OUTDIR = out
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 OBJ = $(addprefix $(OUTDIR)/, $(SRC:.c=.o))
-all: $(NAME)
 
 $(NAME): $(OUTDIR) $(OBJ)
-	(cd $(LIB) && $(MAKE))
-	$(CC) -o $(NAME) $(CFLAGS) -I./libft -L./libft $(PRGFLAGS) $(OBJ)
+	@$(MAKE) -C $(LIB)
+	@$(CC) -o $(NAME) $(CFLAGS) -I./libft -L./libft $(PRGFLAGS) $(OBJ)
 $(OUTDIR)/%.o: $(SRCDIR)/%.c
-	$(CC) -I $(LIB) -o $@ -c $? $(CFLAGS)
+	@$(CC) -I $(LIB) -o $@ -c $? $(CFLAGS)
 
 $(OUTDIR):
 	@mkdir -p $(OUTDIR)
 
 clean:
-	@(cd $(LIB) && $(MAKE) $@)
+	@$(MAKE) -C $(LIB) $@
 	@rm -f $(OBJ)
 	@rm -rf $(OUTDIR)
 
 fclean: clean
-	@(cd $(LIB) && $(MAKE) $@)
+	@$(MAKE) -C $(LIB) $@
 	@rm -f $(NAME)
 
 .PHONY: clean fclean re
 
 re: fclean all
+
+all: $(NAME)

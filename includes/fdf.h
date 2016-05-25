@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 10:07:19 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/20 15:31:14 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/25 16:07:22 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,15 @@ typedef struct			s_posdata
 	struct s_posdata	*next;
 }						t_posdata;
 
+typedef struct			s_image
+{
+	void				*ptr;
+	char				*data;
+	int					byte_per_pixel;
+	int					endian;
+	int					line_size;
+}						t_image;
+
 typedef struct			s_env
 {
 	void				*mlx;
@@ -62,10 +71,12 @@ typedef struct			s_env
 	int					width;
 	t_posdata			*data;
 	t_pos				*modifier;
+	t_image				*render;
 }						t_env;
 
 typedef int				(*t_transformer)(int x, int y, int z);
 
+t_image					*new_img(t_env *env, int width, int height);
 int						proj_dummy_x(t_pos *pos);
 int						proj_dummy_y(t_pos *pos);
 int						proj_iso_x(t_pos *pos);
@@ -81,5 +92,9 @@ int						init_display(t_env *env);
 int						init_data(t_env *env, int ac, char **av);
 t_posdata				*data_put(t_posdata *root, t_pos *array);
 t_pos					*get_pos(t_posdata *data, int x, int y);
+t_pos					*get_and_transform_pos(t_env *env, t_pos *pos, int x,
+	int y);
 int						put_pixel(t_env *env, int x, int y, int color);
+void					compute_render(t_env *env, t_pos *tmp3, t_pos *tmp4);
+void					recompile_render(t_env *env);
 #endif

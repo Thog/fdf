@@ -6,85 +6,11 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 09:59:30 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/25 15:14:15 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/27 11:17:10 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdlib.h>
-#include <math.h>
-
-static void		draw_line1(int nbr[2], int error[2], t_pos *p2, int n)
-{
-	if ((error[0] << 1) >= n)
-	{
-		nbr[0] += (p2->x - nbr[0]) >= 0 ? 1 : -1;
-		error[0] -= n;
-	}
-	if ((error[1] << 1) >= n)
-	{
-		nbr[1] += (p2->y - nbr[1]) >= 0 ? 1 : -1;
-		error[1] -= n;
-	}
-}
-
-int				draw_line_2d(t_env *env, t_pos *p1, t_pos *p2, int color)
-{
-	int i;
-	int n;
-	int nbr[3];
-	int error[2];
-	int delta[2];
-
-	i = -1;
-	nbr[0] = p1->x;
-	nbr[1] = p1->y;
-	nbr[2] = 0;
-	delta[0] = (p2->x - p1->x) < 0 ? -(p2->x - p1->x) : (p2->x - p1->x);
-	delta[1] = (p2->y - p1->y) < 0 ? -(p2->y - p1->y) : (p2->y - p1->y);
-	n = delta[0] > delta[1] ? delta[0] : delta[1];
-	ft_bzero(error, sizeof(error));
-	while (++i < n)
-	{
-		nbr[2] += put_pixel(env, nbr[0], nbr[1], color + 0x020202 *
-			ft_min(i, W_SC));
-		error[0] += delta[0];
-		error[1] += delta[1];
-		draw_line1(nbr, error, p2, n);
-	}
-	return (nbr[2]);
-}
-
-int				draw_line_3d(t_env *env, t_pos *start, t_pos *end, int color)
-{
-	int		result;
-	t_pos	*tmp1;
-	t_pos	*tmp2;
-
-	result = 1;
-	if (!start || !end)
-		return (result);
-	tmp1 = new_pos(proj_iso_x(start), proj_iso_y(start), start->z);
-	tmp2 = new_pos(proj_iso_x(end), proj_iso_y(end), end->z);
-	result = draw_line_2d(env, tmp1, tmp2, color);
-	put_pixel(env, tmp1->x, tmp1->y, 0xFFFFBA);
-	put_pixel(env, tmp2->x, tmp2->y, 0xFFFFBA);
-	free(tmp1);
-	free(tmp2);
-	return (result);
-}
-
-t_pos			*new_pos(int x, int y, int z)
-{
-	t_pos *result;
-
-	if (!(result = (t_pos*)malloc(sizeof(t_pos))))
-		return (NULL);
-	result->x = x;
-	result->y = y;
-	result->z = z;
-	return (result);
-}
 
 t_posdata		*data_put(t_posdata *root, t_pos *array)
 {
@@ -104,4 +30,41 @@ t_posdata		*data_put(t_posdata *root, t_pos *array)
 		return (root);
 	}
 	return (result);
+}
+
+t_pos			*new_pos(int x, int y, int z)
+{
+	t_pos *result;
+
+	if (!(result = (t_pos*)malloc(sizeof(t_pos))))
+		return (NULL);
+	result->x = x;
+	result->y = y;
+	result->z = z;
+	return (result);
+}
+
+static void		destroy_data(t_posdata *data)
+{
+	t_posdata	*tmp;
+
+	while (data)
+	{
+		tmp = data;
+		data = data->next;
+		ft_memdel((void**)&tmp);
+	}
+}
+
+int				destroy_env(t_env *env)
+{
+	if (env->render)
+	{
+		mlx_destroy_window(env->mlx, env->win);
+		mlx_destroy_image(env->mlx, env->render->ptr);
+	}
+	ft_memdel((void*)&env->render);
+	destroy_data(env->data);
+	ft_memdel((void*)&env);
+	return (EXIT_SUCCESS);
 }

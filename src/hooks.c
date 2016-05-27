@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 10:41:55 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/25 16:14:45 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/27 12:21:40 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static int		draw_quad(t_env *env, t_pos *cache, int x, int y)
 	ret = 1;
 	tmp1 = get_and_transform_pos(env, cache, x, y);
 	tmp2 = get_and_transform_pos(env, cache + 1, x + 1, y);
-	ret = draw_line_3d(env, tmp1, tmp2, 0x28112D);
+	ret = draw_line_3d(env->render, tmp1, tmp2, &env->colorizer);
 	tmp2 = get_and_transform_pos(env, cache + 1, x, y + 1);
-	ret += draw_line_3d(env, tmp1, tmp2, 0x28112D);
+	ret += draw_line_3d(env->render, tmp1, tmp2, &env->colorizer);
 	return (ret);
 }
 
@@ -83,7 +83,7 @@ int				key_hook(int keycode, void *param)
 
 	env = (t_env*)param;
 	if (keycode == ESCAPE)
-		exit(EXIT_SUCCESS);
+		exit(destroy_env(env));
 	else if (env)
 	{
 		if (keycode == ARROW_DOWN)

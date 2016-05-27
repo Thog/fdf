@@ -6,21 +6,11 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 12:02:51 by tguillem          #+#    #+#             */
-/*   Updated: 2016/04/14 07:44:29 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/27 10:52:42 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int		proj_dummy_x(t_pos *pos)
-{
-	return (pos->x);
-}
-
-int		proj_dummy_y(t_pos *pos)
-{
-	return (pos->y);
-}
 
 int		proj_iso_x(t_pos *pos)
 {

@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 09:59:30 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/25 15:14:15 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/06/07 16:00:21 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,8 @@ int				draw_line_3d(t_env *env, t_pos *start, t_pos *end, int color)
 	tmp1 = new_pos(proj_iso_x(start), proj_iso_y(start), start->z);
 	tmp2 = new_pos(proj_iso_x(end), proj_iso_y(end), end->z);
 	result = draw_line_2d(env, tmp1, tmp2, color);
-	put_pixel(env, tmp1->x, tmp1->y, 0xFFFFBA);
-	put_pixel(env, tmp2->x, tmp2->y, 0xFFFFBA);
-	free(tmp1);
-	free(tmp2);
+	ft_memdel((void**)&tmp1);
+	ft_memdel((void**)&tmp2);
 	return (result);
 }
 
@@ -78,7 +76,7 @@ t_pos			*new_pos(int x, int y, int z)
 {
 	t_pos *result;
 
-	if (!(result = (t_pos*)malloc(sizeof(t_pos))))
+	if (!(result = (t_pos*)ft_memalloc(sizeof(t_pos))))
 		return (NULL);
 	result->x = x;
 	result->y = y;

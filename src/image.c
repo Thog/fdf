@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 11:54:16 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/25 16:10:45 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/06/07 15:45:36 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void		compute_pixel_size(t_image *img)
 	img->byte_per_pixel = bits / 8;
 	img->endian = endian;
 	img->line_size = line_size;
-	ft_printf("%i\n", img->line_size);
 }
 
 t_image		*new_img(t_env *env, int width, int height)

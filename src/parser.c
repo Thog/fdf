@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 07:38:22 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/20 11:49:44 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/06/08 16:19:52 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ static int	parse_file(char *file, t_env *e)
 		}
 		update_info(e, i);
 	}
+	if (i == -1)
+		return (ft_error_retint("Read error\n", 1));
 	e->width++;
-	ft_printf("Map Size, x: %i, y: %i\n", e->width, e->y);
 	return (0);
 }
 

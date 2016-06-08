@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 07:38:44 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/25 16:13:45 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/06/08 16:22:30 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_pos		*get_and_transform_pos(t_env *env, t_pos *pos, int x, int y)
 	tmp = get_pos(env->data, x, y);
 	if (tmp)
 	{
-		pos->x = (tmp->x + env->modifier->x) * W_SC + W_SC + 1000;
+		pos->x = (tmp->x + env->modifier->x) * W_SC + W_SC + 850;
 		pos->y = (tmp->y + env->modifier->y) * W_SC + W_SC;
 		pos->z = tmp->z * H_SC;
 		return (pos);

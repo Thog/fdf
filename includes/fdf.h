@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 10:07:19 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/25 16:07:22 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/06/08 16:21:27 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 # include <stdlib.h>
 # include <mlx.h>
 # include <fcntl.h>
+# include <errno.h>
 # include "libft.h"
-# define WIDTH 1366
+# define WIDTH 1024
 # define HEIGHT 768
 # define ISO_C1 0.5F
 # define ISO_C2 0.5F
